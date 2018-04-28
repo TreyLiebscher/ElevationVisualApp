@@ -1,0 +1,11 @@
+.elevateDisplay {
+    font-size: 30px;
+}
+
+html, body {
+    height: 100%;
+}
+
+#map {
+    height: 25%;
+}
