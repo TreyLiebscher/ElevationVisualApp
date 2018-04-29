@@ -1,28 +1,39 @@
 * {
     box-sizing: border-box;
     width: 100%;
+    font-family: 'Alegreya SC', serif;
+}
+
+html,
+body {
+    height: 100%;
+    background-color: lightslategray;
+}
+
+h1 {
+    width: 100%;
+    text-align: center;
 }
 
 #js-result {
     border: 2px solid black;
     height: 100%;
     max-width: 1200px;
-    padding: 2%;
+    padding: 1%;
     margin-left: auto;
     margin-right: auto;
     display: flex;
     flex-direction: row;
     margin-bottom: auto;
     background-color: black;
+    border-radius: 10px;
 }
-
 
 .elevateDisplay {
     font-size: 15px;
     border: 1px solid white;
     margin-top: auto;
 }
-
 
 .hiddenElevation {
     display: none;
@@ -33,30 +44,40 @@
     display: inline;
 }
 
-#js-result > .elevateDisplay:first-of-type {
-    background-color: green;
-    border: 1px solid black;
+#js-result>.elevateDisplay:first-of-type {
+    /* background-color: green; */
+    border: 1px solid green;
     width: 250%;
 }
 
-#js-result > .elevateDisplay:last-of-type {
-    background-color: red;
-    border: 1px solid black;
+#js-result>.elevateDisplay:last-of-type {
+    /* background-color: red; */
+    border: 1px solid red;
     width: 250%;
-}
-
-
-html, body {
-    height: 100%;
 }
 
 #js-search-form {
-    width: 50%;
+    width: 33%;
+    height: 100%;
     margin: 2% auto auto auto;
 }
 
 .addressEntry {
     margin: auto auto 2% auto;
+    height: 50px;
+    font-size: 20px;
+}
+
+#submitButton {
+    width: 50%;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    background-color: black;
+    color: white;
+    border: 2px solid white;
+    font-size: 20px;
 }
 
 .start {

@@ -14,7 +14,7 @@ function getCoordinates(address, callback) {
 
 function getElevationData(coordStart, coordEnd, callback) {
     const query = {
-        'path': `${coordStart}|${coordEnd}` ,
+        'path': `${coordStart}|${coordEnd}`,
         'samples': 256,
         key: 'AIzaSyD819M3CdI9bJbgpG8T_Exb9Hxbsy0Jd5Q'
     }
@@ -49,7 +49,7 @@ function watchSubmit() {
     $('#js-search-form').submit(event => {
         event.preventDefault();
         goFetch();
-    });   
+    });
 }
 
 function goFetch() {
@@ -57,9 +57,9 @@ function goFetch() {
     const findEndAddress = $(event.currentTarget).find('.end');
     const startAddress = findStartAddress.val();
     const endAddress = findEndAddress.val();
-    getCoordinates(startAddress, function(result){
+    getCoordinates(startAddress, function (result) {
         const coordStart = result.results.map((item, index) => renderCoordinates(item));
-        getCoordinates(endAddress, function(result){
+        getCoordinates(endAddress, function (result) {
             const coordEnd = result.results.map((item, index) => renderCoordinates(item));
             getElevationData(coordStart, coordEnd, displayElevation);
         })
@@ -67,12 +67,3 @@ function goFetch() {
 }
 
 $(watchSubmit);
-
-
-    
-
-
-
-
-
-
