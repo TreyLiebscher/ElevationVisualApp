@@ -1,9 +1,70 @@
-.elevateDisplay {
-    font-size: 30px;
+* {
+    box-sizing: border-box;
+    width: 100%;
 }
+
+#js-result {
+    border: 2px solid black;
+    height: 100%;
+    max-width: 1200px;
+    padding: 2%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: auto;
+    background-color: black;
+}
+
+
+.elevateDisplay {
+    font-size: 15px;
+    border: 1px solid white;
+    margin-top: auto;
+}
+
+
+.hiddenElevation {
+    display: none;
+    color: white;
+}
+
+.elevateDisplay:hover .hiddenElevation {
+    display: inline;
+}
+
+#js-result > .elevateDisplay:first-of-type {
+    background-color: green;
+    border: 1px solid black;
+    width: 250%;
+}
+
+#js-result > .elevateDisplay:last-of-type {
+    background-color: red;
+    border: 1px solid black;
+    width: 250%;
+}
+
 
 html, body {
     height: 100%;
+}
+
+#js-search-form {
+    width: 50%;
+    margin: 2% auto auto auto;
+}
+
+.addressEntry {
+    margin: auto auto 2% auto;
+}
+
+.start {
+    border: 2px solid green;
+}
+
+.end {
+    border: 2px solid red;
 }
 
 #map {

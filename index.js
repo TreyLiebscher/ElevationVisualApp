@@ -12,9 +12,10 @@ function getCoordinates(address, callback) {
     $.getJSON(geoCodingURL, query, callback)
 }
 
-function getElevationData(coordinates, callback) {
+function getElevationData(coordStart, coordEnd, callback) {
     const query = {
-        'locations': `${coordinates}` ,
+        'path': `${coordStart}|${coordEnd}` ,
+        'samples': 256,
         key: 'AIzaSyD819M3CdI9bJbgpG8T_Exb9Hxbsy0Jd5Q'
     }
     $.getJSON(googleElevationURL, query, callback);
@@ -22,7 +23,7 @@ function getElevationData(coordinates, callback) {
 
 function renderResult(result) {
     return `
-    <div class="elevateDisplay">${(result.elevation) * 3.28}</div>
+    <div style='height:${(result.elevation) / 5}px' class='elevateDisplay'><p class='hiddenElevation'>${Math.floor((result.elevation) * 3.28)}</p></div>
     `
 }
 
@@ -36,13 +37,13 @@ function displayElevation(data) {
     const results = data.results.map((item, index) => renderResult(item));
     $('#js-result').html(results);
 }
-
-function displayCoordinates(data) {
-    const results = data.results.map((item, index) => renderCoordinates(item));
-    // $('.rawCoA').html(results);
-    console.log(results);
-    return results;
-}
+// Could use this for some type of identifier of where an elevation bar actually is
+// function displayCoordinates(data) {
+//     const results = data.results.map((item, index) => renderCoordinates(item));
+//     $('.rawCoA').html(results);
+//     console.log(results);
+//     return results;
+// }
 
 function watchSubmit() {
     $('#js-search-form').submit(event => {
@@ -52,12 +53,17 @@ function watchSubmit() {
 }
 
 function goFetch() {
-    const findCood = $(event.currentTarget).find('#addressEntry');
-    const coordinates = findCood.val();
-    getCoordinates(coordinates, function(result){
-        const rawCoord = result.results.map((item, index) => renderCoordinates(item));
-        getElevationData(rawCoord, displayElevation);
-    });
+    const findStartAddress = $(event.currentTarget).find('.start');
+    const findEndAddress = $(event.currentTarget).find('.end');
+    const startAddress = findStartAddress.val();
+    const endAddress = findEndAddress.val();
+    getCoordinates(startAddress, function(result){
+        const coordStart = result.results.map((item, index) => renderCoordinates(item));
+        getCoordinates(endAddress, function(result){
+            const coordEnd = result.results.map((item, index) => renderCoordinates(item));
+            getElevationData(coordStart, coordEnd, displayElevation);
+        })
+    })
 }
 
 $(watchSubmit);
