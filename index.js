@@ -27,10 +27,9 @@ function renderResult(result) {
 }
 
 function renderCoordinates(result) {
-    return `
-    <div class="latDisplay">${result.geometry.location.lat}</div>
-    <div class="lngDisplay">${result.geometry.location.lng}</div>
-    `
+    let latitude = result.geometry.location.lat;
+    let longitude = result.geometry.location.lng;
+    return latitude + ',' + longitude;
 }
 
 function displayElevation(data) {
@@ -40,32 +39,33 @@ function displayElevation(data) {
 
 function displayCoordinates(data) {
     const results = data.results.map((item, index) => renderCoordinates(item));
-    $('.rawCoA').html(results);
+    // $('.rawCoA').html(results);
+    console.log(results);
+    return results;
 }
 
 function watchSubmit() {
     $('#js-search-form').submit(event => {
         event.preventDefault();
-        const findCood = $(event.currentTarget).find('#addressEntry');
-        const coordinates = findCood.val();
-        getCoordinates(coordinates, displayCoordinates);
+        goFetch();
     });   
 }
 
-function calculateElevation() {
-    $('#js-elevate-button').on('click', function(event) {
-        event.preventDefault();
-        const lat = $('.latDisplay').text();
-        const lng = $('.lngDisplay').text();
-        const coordinates = lat + ',' + lng;
-        getElevationData(coordinates, displayElevation);
+function goFetch() {
+    const findCood = $(event.currentTarget).find('#addressEntry');
+    const coordinates = findCood.val();
+    getCoordinates(coordinates, function(result){
+        const rawCoord = result.results.map((item, index) => renderCoordinates(item));
+        getElevationData(rawCoord, displayElevation);
     });
 }
 
-
-
-$(calculateElevation);
 $(watchSubmit);
+
+
+    
+
+
 
 
 

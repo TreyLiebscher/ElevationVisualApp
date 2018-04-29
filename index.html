@@ -12,11 +12,10 @@
 <body>
     <main>
         <div id="js-result"></div>
-        <button type='button' id='js-elevate-button'>Elevate</button>
         <form id="js-search-form">
             <input id='latitude'>
             <input id='longitude'>
-            <input id='addressEntry'>
+            <input id='addressEntry' placeholder='ex. "123 Main St Boulder, CO"'>
             <button type='submit'>Submit</button>
         </form>
         <div class="coord rawCoA"></div>
@@ -25,7 +24,7 @@
         <div class="elevation elevA"></div>
         <div class="elevation elevB"></div>
     </main>
-    <div id="map"></div>
+    <!-- <div id="map"></div>
     <script>
     var map;
     function initMap() {
@@ -36,7 +35,7 @@
     }
     </script>
     <script  async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPUXTrCYlQ-XYOH_G6Ct_hTkCOfAeRChM&callback=initMap">
-  </script>
+  </script> -->
     <script src="index.js"></script>
 </body>
 
