@@ -1,6 +1,5 @@
 * {
     box-sizing: border-box;
-    width: 100%;
     font-family: 'Alegreya SC', serif;
 }
 
@@ -8,6 +7,8 @@ html,
 body {
     height: 100%;
     background-color: lightslategray;
+    margin: auto;
+    width: 95%;
 }
 
 h1 {
@@ -30,9 +31,21 @@ h1 {
 }
 
 .elevateDisplay {
-    font-size: 15px;
+    font-size: 25px;
     border: 1px solid white;
     margin-top: auto;
+
+}
+
+.elevateDisplay:hover,
+.belowSeaLevel:hover {
+    background-color: yellow;
+
+}
+.belowSeaLevel {
+    font-size: 25px;
+    border: 1px solid lightblue;
+
 }
 
 .hiddenElevation {
@@ -40,20 +53,25 @@ h1 {
     color: white;
 }
 
-.elevateDisplay:hover .hiddenElevation {
+
+.elevateDisplay:hover .hiddenElevation,
+.belowSeaLevel:hover .hiddenElevation  {
+    position: absolute;
+    top: 7%;
     display: inline;
 }
 
+
 #js-result>.elevateDisplay:first-of-type {
     /* background-color: green; */
-    border: 1px solid green;
-    width: 250%;
+    border: 3px solid green;
+    width: 300%;
 }
 
 #js-result>.elevateDisplay:last-of-type {
     /* background-color: red; */
-    border: 1px solid red;
-    width: 250%;
+    border: 3px solid red;
+    width: 300%;
 }
 
 #js-search-form {
@@ -90,4 +108,67 @@ h1 {
 
 #map {
     height: 25%;
+}
+
+.js-step-holder {
+    display: flex;
+    flex-direction: row;
+}
+
+.js-step-result {
+    border: 2px solid black;
+    height: 100%;
+    max-width: 1200px;
+    padding: 1%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: auto;
+    background-color: black;
+    border-radius: 10px;
+}
+
+.js-step-result elevateDisplay {
+    max-width: 1%;
+}
+
+.directionInput {
+    width: 50%;
+    margin-bottom: 1%;
+}
+
+#directionSubmit {
+    width: 50%;
+}
+
+#js-direction-form {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    height: 100px;
+}
+
+.directionListItem {
+    border: 1px solid black;
+}
+
+@media only screen and (min-width: 640px) {
+    .visualHolder {
+        /* border: 1px solid black; */
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        padding: 2%;
+    }
+
+    .chartHolder {
+        width: 75%;
+    }
+    .directionListItem {
+        border: 1px solid black;
+    }
+    .directionListItem:hover {
+        background-color: white;
+    }
 }

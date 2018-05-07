@@ -4,27 +4,32 @@ const googleElevationURL = 'https://cors-anywhere.herokuapp.com/https://maps.goo
 
 const geoCodingURL = 'https://maps.google.com/maps/api/geocode/json?'
 
-function getCoordinates(address, callback) {
+const directionsURL = 'https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?'
+
+// function getCoordinates(address, callback) {
+//     const query = {
+//         'address': `${address}`,
+//         key: 'AIzaSyAPUXTrCYlQ-XYOH_G6Ct_hTkCOfAeRChM'
+//     }
+//     $.getJSON(geoCodingURL, query, callback)
+// }
+
+function getDirections(origin, destination, callback) {
     const query = {
-        'address': `${address}`,
-        key: 'AIzaSyAPUXTrCYlQ-XYOH_G6Ct_hTkCOfAeRChM'
+        'origin': `${origin}`,
+        'destination': `${destination}`,
+        key: 'AIzaSyD819M3CdI9bJbgpG8T_Exb9Hxbsy0Jd5Q',
+        alternatives: 'false'
     }
-    $.getJSON(geoCodingURL, query, callback)
+    $.getJSON(directionsURL, query, callback);
 }
 
-function getElevationData(coordStart, coordEnd, callback) {
+function getElevationData(pathPoint, callback) {
     const query = {
-        'path': `${coordStart}|${coordEnd}`,
-        'samples': 256,
+        'locations': givePath(pathPoint),
         key: 'AIzaSyD819M3CdI9bJbgpG8T_Exb9Hxbsy0Jd5Q'
     }
     $.getJSON(googleElevationURL, query, callback);
-}
-
-function renderResult(result) {
-    return `
-    <div style='height:${(result.elevation) / 5}px' class='elevateDisplay'><p class='hiddenElevation'>${Math.floor((result.elevation) * 3.28)}</p></div>
-    `
 }
 
 function renderCoordinates(result) {
@@ -33,37 +38,235 @@ function renderCoordinates(result) {
     return latitude + ',' + longitude;
 }
 
-function displayElevation(data) {
-    const results = data.results.map((item, index) => renderResult(item));
-    $('#js-result').html(results);
-}
-// Could use this for some type of identifier of where an elevation bar actually is
-// function displayCoordinates(data) {
-//     const results = data.results.map((item, index) => renderCoordinates(item));
-//     $('.rawCoA').html(results);
-//     console.log(results);
-//     return results;
-// }
+//Used to store results
+let pathArray = [];
 
-function watchSubmit() {
-    $('#js-search-form').submit(event => {
-        event.preventDefault();
-        goFetch();
+//Used to store results (will be removed soon)
+let polyArray = [];
+
+
+function buildPathArray(result) {
+    for (let i = 0; i < result.legs[0].steps.length; i++) {
+        
+        let latitude = result.legs[0].steps[i].start_location.lat;
+        let longitude = result.legs[0].steps[i].start_location.lng;
+        let polyLine = result.legs[0].steps[i].polyline.points;
+        let directionSteps = result.legs[0].steps[i].html_instructions;
+        let pathPoint = {
+            latitude: latitude,
+            longitude: longitude,
+            poly: polyLine,
+            directions: directionSteps
+        };
+
+        // directionsArray.push(directionSteps);
+        polyArray.push(polyLine);
+        pathArray.push(pathPoint);
+    }
+}
+
+
+
+function formatDirections(data) {
+    const results = data.routes.map((item, index) => buildPathArray(item));
+}
+
+function promiseMe(value, millis, doReject) {
+    return new Promise((resolve, reject) => {
+        if (doReject) {
+            reject(new Error('Bad Address'));
+            return;
+        }
+        window.setTimeout(() => {
+            console.log(new Date().toUTCString(), 'Resolved:', value);
+            resolve(value);
+        }, millis);
     });
 }
 
-function goFetch() {
-    const findStartAddress = $(event.currentTarget).find('.start');
-    const findEndAddress = $(event.currentTarget).find('.end');
-    const startAddress = findStartAddress.val();
-    const endAddress = findEndAddress.val();
-    getCoordinates(startAddress, function (result) {
-        const coordStart = result.results.map((item, index) => renderCoordinates(item));
-        getCoordinates(endAddress, function (result) {
-            const coordEnd = result.results.map((item, index) => renderCoordinates(item));
-            getElevationData(coordStart, coordEnd, displayElevation);
-        })
+function givePath(arr) {
+    let pathCoordsArr = [];
+    for (let i = 0; i < arr.length; i++) {
+        let chunkStr = '' + arr[i].latitude + ',' + arr[i].longitude;
+        pathCoordsArr.push(chunkStr)
+    }
+    const retStr = pathCoordsArr.join('|')
+    console.log('givePath returns:', retStr)
+    return retStr
+}
+
+function directionRender(result) {
+    return `
+    <li class='directionListItem' id='${result.poly}'>${result.directions}</li>
+    <br>
+    `
+}
+
+function displayDirections(arr) {
+    const results = arr.map((item) => directionRender(item));
+    $('#js-direction-result').html(results);
+}
+
+function watchGo() {
+    $('#js-direction-form').submit(event => {
+        event.preventDefault();
+        const findOrigin = $(event.currentTarget).find('#startDirection');
+        const origin = findOrigin.val();
+        const findDest = $(event.currentTarget).find('#endDirection');
+        const destination = findDest.val();
+        console.log(pathArray);
+        goFetchAsyncChart();
+        getDirections(origin, destination, formatDirections);
     })
 }
 
-$(watchSubmit);
+//Used to decode encoded polylines along a route
+function decode(encoded) {
+    var points = []
+    var index = 0,
+        len = encoded.length;
+    var lat = 0,
+        lng = 0;
+    while (index < len) {
+        var b, shift = 0,
+            result = 0;
+        do {
+            b = encoded.charAt(index++).charCodeAt(0) - 63; //finds ascii                                                                                    //and substract it by 63
+            result |= (b & 0x1f) << shift;
+            shift += 5;
+        } while (b >= 0x20);
+        var dlat = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
+        lat += dlat;
+        shift = 0;
+        result = 0;
+        do {
+            b = encoded.charAt(index++).charCodeAt(0) - 63;
+            result |= (b & 0x1f) << shift;
+            shift += 5;
+        } while (b >= 0x20);
+        var dlng = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
+        lng += dlng;
+
+        points.push({
+            latitude: (lat / 1E5),
+            longitude: (lng / 1E5)
+        })
+
+    }
+    return points
+}
+
+// MAIN CHART
+function formatElevationChart(data) {
+    const results = data.results.map((item, index) => renderDataSet(item));
+}
+
+function renderDataSet(result) {
+    let labels = Math.floor(result.elevation);
+    addData(chart, labels, result.elevation);
+}
+
+// SECONDARY CHART
+function formatStepElevationChart(data) {
+    const results = data.results.map((item, index) => renderStepData(item));
+}
+
+function renderStepData(result) {
+    let labels = Math.floor(result.elevation);
+    addData(stepsChart, labels, result.elevation);
+}
+
+
+async function goFetchAsyncChart() {
+    try {
+        var coordsResult = await promiseMe(pathArray, 1000);
+        var elevationResult = await promiseMe(coordsResult, 1000);
+        // var directionResult = await promiseMe(directionsArray, 1000);
+        // var directionTEST = await promiseMe(pathArray, 1000)
+    } catch (error) {
+        console.error(error);
+    }
+    console.log('Got Both:', coordsResult, elevationResult);
+    getElevationData(elevationResult, formatElevationChart);
+    displayDirections(elevationResult);
+    displaySecondaryChart();
+}
+
+function addData(chart, label, data) {
+    chart.data.labels.push(label);
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data.push(data);
+    });
+    chart.update();
+}
+// The main chart
+var ctx = document.getElementById('myChart').getContext('2d');
+var chart = new Chart(ctx, {
+
+    type: 'line',
+
+
+    data: {
+        labels: [],
+        datasets: [{
+            label: "Journey Elevation (meters)",
+            borderColor: 'rgb(255, 99, 132)',
+            data: []
+        }]
+    },
+
+
+    options: {}
+});
+// The secondary chart for each step of journey
+var stepsContent = document.getElementById('stepsChart').getContext('2d');
+var stepsChart = new Chart(stepsContent, {
+
+    type: 'line',
+
+
+    data: {
+        labels: [],
+        datasets: [{
+            label: "Step Elevation (meters)",
+            borderColor: 'rgb(9, 214, 2)',
+            data: []
+        }]
+    },
+
+
+    options: {}
+});
+
+function reducePolyPoints(arr) {
+    const MAX = 512;
+    let step = 1;
+    if (arr.length > MAX) {
+        step = Math.ceil(arr.length / MAX);
+    }
+
+    const sampledArr = [];
+
+    for (let i = 0; i < arr.length; i += step) {
+        sampledArr.push(arr[i]);
+    }
+
+    return sampledArr;
+}
+
+function displaySecondaryChart() {
+    $('.directionListItem').on('click', function(event) {
+        event.preventDefault();
+        let xxx = decode(this.id);
+        let stepCoords = reducePolyPoints(xxx);
+        getElevationData(stepCoords, formatStepElevationChart);
+        console.log('stepCoords returns:', stepCoords);
+    });
+}
+
+
+
+
+
+
+$(watchGo);

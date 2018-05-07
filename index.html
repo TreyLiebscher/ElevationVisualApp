@@ -13,16 +13,23 @@
 <body>
     <main>
         <h1>Elevation Visualizer</h1>
-        <div id="js-result"></div>
-        <form id="js-search-form">
-            <label for='startAddress'>Start Address</label>
-            <input id='startAddress' class='addressEntry start' placeholder='ex. "123 Main St Boulder, CO"'>
-            <label for='endAddress'>End Address</label>
-            <input id='endAddress' class='addressEntry end' placeholder='ex. "123 Main St Boulder, CO"'>
-            <button type='submit' id='submitButton'>Submit</button>
+        <form id="js-direction-form">
+            <input id='startDirection' class='directionInput' placeholder='enter your starting address'>
+            <input id='endDirection' class='directionInput' placeholder='enter your destination'>
+            <button type='submit' id='directionSubmit'>Go</button>
         </form>
+        <section role='region' class='visualHolder'>
+        <div class='chartHolder'>
+            <canvas id="myChart"></canvas>
+            <canvas id="stepsChart"></canvas>
+        </div>
+        <ol id="js-direction-result">
+        </ol>
+        </section>
     </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <script src="index.js"></script>
+
 </body>
 
 </html>
