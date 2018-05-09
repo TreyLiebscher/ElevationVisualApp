@@ -16,121 +16,9 @@ h1 {
     text-align: center;
 }
 
-#js-result {
-    border: 2px solid black;
-    height: 100%;
-    max-width: 1200px;
+.controlHolder {
+    text-align: center;
     padding: 1%;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    flex-direction: row;
-    margin-bottom: auto;
-    background-color: black;
-    border-radius: 10px;
-}
-
-.elevateDisplay {
-    font-size: 25px;
-    border: 1px solid white;
-    margin-top: auto;
-
-}
-
-.elevateDisplay:hover,
-.belowSeaLevel:hover {
-    background-color: yellow;
-
-}
-.belowSeaLevel {
-    font-size: 25px;
-    border: 1px solid lightblue;
-
-}
-
-.hiddenElevation {
-    display: none;
-    color: white;
-}
-
-
-.elevateDisplay:hover .hiddenElevation,
-.belowSeaLevel:hover .hiddenElevation  {
-    position: absolute;
-    top: 7%;
-    display: inline;
-}
-
-
-#js-result>.elevateDisplay:first-of-type {
-    /* background-color: green; */
-    border: 3px solid green;
-    width: 300%;
-}
-
-#js-result>.elevateDisplay:last-of-type {
-    /* background-color: red; */
-    border: 3px solid red;
-    width: 300%;
-}
-
-#js-search-form {
-    width: 33%;
-    height: 100%;
-    margin: 2% auto auto auto;
-}
-
-.addressEntry {
-    margin: auto auto 2% auto;
-    height: 50px;
-    font-size: 20px;
-}
-
-#submitButton {
-    width: 50%;
-    height: 50px;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    background-color: black;
-    color: white;
-    border: 2px solid white;
-    font-size: 20px;
-}
-
-.start {
-    border: 2px solid green;
-}
-
-.end {
-    border: 2px solid red;
-}
-
-#map {
-    height: 25%;
-}
-
-.js-step-holder {
-    display: flex;
-    flex-direction: row;
-}
-
-.js-step-result {
-    border: 2px solid black;
-    height: 100%;
-    max-width: 1200px;
-    padding: 1%;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    flex-direction: row;
-    margin-bottom: auto;
-    background-color: black;
-    border-radius: 10px;
-}
-
-.js-step-result elevateDisplay {
-    max-width: 1%;
 }
 
 .directionInput {
@@ -141,6 +29,8 @@ h1 {
 #directionSubmit {
     width: 50%;
 }
+
+
 
 #js-direction-form {
     width: 100%;
@@ -170,5 +60,6 @@ h1 {
     }
     .directionListItem:hover {
         background-color: white;
+        cursor: pointer;
     }
 }

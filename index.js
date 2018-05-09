@@ -2,17 +2,13 @@
 
 const googleElevationURL = 'https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/elevation/json?'
 
-const geoCodingURL = 'https://maps.google.com/maps/api/geocode/json?'
-
 const directionsURL = 'https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?'
 
-// function getCoordinates(address, callback) {
-//     const query = {
-//         'address': `${address}`,
-//         key: 'AIzaSyAPUXTrCYlQ-XYOH_G6Ct_hTkCOfAeRChM'
-//     }
-//     $.getJSON(geoCodingURL, query, callback)
-// }
+const placesURL = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?'
+
+const startInput = $('#startDirection');
+
+const endInput = $('#endDirection');
 
 function getDirections(origin, destination, callback) {
     const query = {
@@ -38,12 +34,18 @@ function renderCoordinates(result) {
     return latitude + ',' + longitude;
 }
 
+function getAutoComplete(searchTerm) {
+    const query = {
+        input: $('#startDirection'),
+        key: 'AIzaSyD819M3CdI9bJbgpG8T_Exb9Hxbsy0Jd5Q'
+    }
+    $.getJSON(placesURL, query);
+}
+
+// var autocomplete = new google.maps.places.Autocomplete(INPUT_BOX[0]);
+
 //Used to store results
 let pathArray = [];
-
-//Used to store results (will be removed soon)
-let polyArray = [];
-
 
 function buildPathArray(result) {
     for (let i = 0; i < result.legs[0].steps.length; i++) {
@@ -52,20 +54,17 @@ function buildPathArray(result) {
         let longitude = result.legs[0].steps[i].start_location.lng;
         let polyLine = result.legs[0].steps[i].polyline.points;
         let directionSteps = result.legs[0].steps[i].html_instructions;
+        let distanceText = result.legs[0].steps[i].distance.text;
         let pathPoint = {
             latitude: latitude,
             longitude: longitude,
             poly: polyLine,
-            directions: directionSteps
+            directions: directionSteps,
+            distance: distanceText
         };
-
-        // directionsArray.push(directionSteps);
-        polyArray.push(polyLine);
         pathArray.push(pathPoint);
     }
 }
-
-
 
 function formatDirections(data) {
     const results = data.routes.map((item, index) => buildPathArray(item));
@@ -97,7 +96,7 @@ function givePath(arr) {
 
 function directionRender(result) {
     return `
-    <li class='directionListItem' id='${result.poly}'>${result.directions}</li>
+    <li class='directionListItem' id='${result.poly}'>${result.directions} (${result.distance})</li>
     <br>
     `
 }
@@ -105,19 +104,6 @@ function directionRender(result) {
 function displayDirections(arr) {
     const results = arr.map((item) => directionRender(item));
     $('#js-direction-result').html(results);
-}
-
-function watchGo() {
-    $('#js-direction-form').submit(event => {
-        event.preventDefault();
-        const findOrigin = $(event.currentTarget).find('#startDirection');
-        const origin = findOrigin.val();
-        const findDest = $(event.currentTarget).find('#endDirection');
-        const destination = findDest.val();
-        console.log(pathArray);
-        goFetchAsyncChart();
-        getDirections(origin, destination, formatDirections);
-    })
 }
 
 //Used to decode encoded polylines along a route
@@ -179,14 +165,11 @@ function renderStepData(result) {
 
 async function goFetchAsyncChart() {
     try {
-        var coordsResult = await promiseMe(pathArray, 1000);
-        var elevationResult = await promiseMe(coordsResult, 1000);
-        // var directionResult = await promiseMe(directionsArray, 1000);
-        // var directionTEST = await promiseMe(pathArray, 1000)
+        var elevationResult = await promiseMe(pathArray, 1000);
     } catch (error) {
         console.error(error);
     }
-    console.log('Got Both:', coordsResult, elevationResult);
+    console.log('pathArray contains:', elevationResult);
     getElevationData(elevationResult, formatElevationChart);
     displayDirections(elevationResult);
     displaySecondaryChart();
@@ -196,6 +179,14 @@ function addData(chart, label, data) {
     chart.data.labels.push(label);
     chart.data.datasets.forEach((dataset) => {
         dataset.data.push(data);
+    });
+    chart.update();
+}
+
+function removeData(chart) {
+    chart.data.labels.splice(0,chart.data.labels.length)
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data.splice(0,dataset.data.length);
     });
     chart.update();
 }
@@ -238,6 +229,7 @@ var stepsChart = new Chart(stepsContent, {
     options: {}
 });
 
+// If decoded polyPoints exceed the 512 location limit in Google Elevation API
 function reducePolyPoints(arr) {
     const MAX = 512;
     let step = 1;
@@ -257,6 +249,7 @@ function reducePolyPoints(arr) {
 function displaySecondaryChart() {
     $('.directionListItem').on('click', function(event) {
         event.preventDefault();
+        removeData(stepsChart);
         let xxx = decode(this.id);
         let stepCoords = reducePolyPoints(xxx);
         getElevationData(stepCoords, formatStepElevationChart);
@@ -264,9 +257,40 @@ function displaySecondaryChart() {
     });
 }
 
+function watchGo() {
+    $('#js-direction-form').submit(event => {
+        event.preventDefault();
+        const findOrigin = $(event.currentTarget).find('#startDirection');
+        const origin = findOrigin.val();
+        const findDest = $(event.currentTarget).find('#endDirection');
+        const destination = findDest.val();
+        console.log(pathArray);
+        goFetchAsyncChart();
+        getDirections(origin, destination, formatDirections);
+    })
+}
 
+function clearResults() {
+    $('.js-clearResults').on('click', function(event) {
+        event.preventDefault();
+        pathArray.splice(0,pathArray.length);
+        $('#js-direction-result').html('');
+        removeData(chart);
+        removeData(stepsChart);
+        $('.directionInput').val('');
+    });
+}
 
+// Autocomplete
 
+function initialize() {
+    var input1 = document.getElementById('startDirection');
+    new google.maps.places.Autocomplete(input1);
+    var input2 = document.getElementById('endDirection');
+    new google.maps.places.Autocomplete(input2);
+}
+  
+google.maps.event.addDomListener(window, 'load', initialize);
 
-
+$(clearResults);
 $(watchGo);

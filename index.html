@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width">
     <title>Elevation Visualizer</title>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiRNwf8WgICxkJExjBvQQuqVJ-RSS1hXA&libraries=places,geometry"></script>
     <link href="main.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Alegreya+SC:800" rel="stylesheet">
 </head>
@@ -13,11 +14,16 @@
 <body>
     <main>
         <h1>Elevation Visualizer</h1>
+        <section role='region' class='controlHolder'>
         <form id="js-direction-form">
             <input id='startDirection' class='directionInput' placeholder='enter your starting address'>
             <input id='endDirection' class='directionInput' placeholder='enter your destination'>
             <button type='submit' id='directionSubmit'>Go</button>
         </form>
+        <button type='button' class='js-clearResults'>Clear</button>
+        <br>
+        <img class='googlePowered' src='https://developers.google.com/places/documentation/images/powered-by-google-on-non-white.png' alt='powered by Google logo'>
+        </section>
         <section role='region' class='visualHolder'>
         <div class='chartHolder'>
             <canvas id="myChart"></canvas>
@@ -26,7 +32,10 @@
         <ol id="js-direction-result">
         </ol>
         </section>
+
+        
     </main>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiRNwf8WgICxkJExjBvQQuqVJ-RSS1hXA&libraries=places,geometry"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <script src="index.js"></script>
 
