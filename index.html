@@ -5,8 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>Elevation Visualizer</title>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiRNwf8WgICxkJExjBvQQuqVJ-RSS1hXA&libraries=places,geometry"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    
     <link href="main.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Alegreya+SC:800" rel="stylesheet">
 </head>
@@ -19,10 +20,8 @@
             <input id='startDirection' class='directionInput' placeholder='enter your starting address'>
             <input id='endDirection' class='directionInput' placeholder='enter your destination'>
             <button type='submit' id='directionSubmit'>Go</button>
+            <button type='button' class='js-clearResults'>Clear</button>
         </form>
-        <button type='button' class='js-clearResults'>Clear</button>
-        <br>
-        <img class='googlePowered' src='https://developers.google.com/places/documentation/images/powered-by-google-on-non-white.png' alt='powered by Google logo'>
         </section>
         <section role='region' class='visualHolder'>
         <div class='chartHolder'>

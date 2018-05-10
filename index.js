@@ -193,7 +193,7 @@ function renderStepData(result) {
 
 async function goFetchAsyncChart() {
     try {
-        var elevationResult = await promiseMe(pathArray, 1000);
+        var elevationResult = await promiseMe(pathArray, 2000);
     } catch (error) {
         console.error(error);
     }
