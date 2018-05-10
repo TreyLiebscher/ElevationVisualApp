@@ -22,22 +22,26 @@ h1 {
 }
 
 .directionInput {
-    width: 50%;
+    width: 100%;
+    height: 40px;
     margin-bottom: 1%;
 }
 
 #directionSubmit {
-    width: 50%;
+    width: 100%;
+}
+
+.js-clearResults {
+    width: 100%;
 }
 
 
 
-#js-direction-form {
+/* #js-direction-form {
     width: 100%;
     margin: auto;
     text-align: center;
-    height: 100px;
-}
+} */
 
 .directionListItem {
     border: 1px solid black;
@@ -61,5 +65,40 @@ h1 {
     .directionListItem:hover {
         background-color: white;
         cursor: pointer;
+    }
+
+    .controlHolder {
+        text-align: center;
+        padding: 1%;
+    }
+
+    #js-direction-form {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    #js-direction-form 
+    .directionInput,
+    #directionSubmit,
+    .js-clearResults {
+        margin: auto auto 2% auto;
+    }
+
+    .directionInput {
+        width: 50%;
+        height: 35px;
+    }
+    
+    #directionSubmit {
+        width: 40%;
+        height: 40px;
+    }
+    
+    .js-clearResults {
+        width: 35%;
+        border: 1px solid red;
+        background-color: black;
+        color: white;
     }
 }
