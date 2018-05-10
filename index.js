@@ -20,9 +20,37 @@ function getDirections(origin, destination, callback) {
     $.getJSON(directionsURL, query, callback);
 }
 
-function getElevationData(pathPoint, callback) {
+function getElevationData(pathPoints, callback) {
+
+    
+    if(pathPoints.length>1){
+    const half = Math.floor(pathPoints.length/2)   
+    const firstHalfArr = pathPoints.slice(0, half) 
+    const secondHalfArr = pathPoints.slice(half, pathPoints.length) 
+
+    const queryOne = {
+        'locations': givePath(firstHalfArr),
+        key: 'AIzaSyD819M3CdI9bJbgpG8T_Exb9Hxbsy0Jd5Q'
+    }
+
+    const queryTwo = {
+        'locations': givePath(secondHalfArr),
+        key: 'AIzaSyD819M3CdI9bJbgpG8T_Exb9Hxbsy0Jd5Q'
+    }
+
+    const p1 = $.getJSON(googleElevationURL, queryOne)
+    const p2 = $.getJSON(googleElevationURL, queryTwo)
+
+    Promise.all([p1,p2]).then(results=>{
+        const finalResults = [].concat(results[0]).concat(results[1])
+        callback(finalResults)
+    })
+
+    return
+    }
+
     const query = {
-        'locations': givePath(pathPoint),
+        'locations': givePath(pathPoints),
         key: 'AIzaSyD819M3CdI9bJbgpG8T_Exb9Hxbsy0Jd5Q'
     }
     $.getJSON(googleElevationURL, query, callback);
