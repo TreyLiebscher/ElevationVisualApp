@@ -41,8 +41,10 @@ function getElevationData(pathPoints, callback) {
     const p1 = $.getJSON(googleElevationURL, queryOne)
     const p2 = $.getJSON(googleElevationURL, queryTwo)
 
-    Promise.all([p1,p2]).then(results=>{
-        const finalResults = [].concat(results[0]).concat(results[1])
+    Promise.all([p1,p2]).then(responses=>{
+        
+        const finalResults = [].concat(responses[0].results).concat(responses[1].results)
+        console.log('finalresults returns:',responses)
         callback(finalResults)
     })
 
@@ -172,7 +174,9 @@ function decode(encoded) {
 
 // MAIN CHART
 function formatElevationChart(data) {
-    const results = data.results.map((item, index) => renderDataSet(item));
+    console.log('data returns:', data);
+    const results = data.map((item, index) => renderDataSet(item));
+
 }
 
 function renderDataSet(result) {
@@ -182,7 +186,7 @@ function renderDataSet(result) {
 
 // SECONDARY CHART
 function formatStepElevationChart(data) {
-    const results = data.results.map((item, index) => renderStepData(item));
+    const results = data.map((item, index) => renderStepData(item));
 }
 
 function renderStepData(result) {
@@ -193,7 +197,7 @@ function renderStepData(result) {
 
 async function goFetchAsyncChart() {
     try {
-        var elevationResult = await promiseMe(pathArray, 2000);
+        var elevationResult = await promiseMe(pathArray, 3000);
     } catch (error) {
         console.error(error);
     }
