@@ -107,6 +107,9 @@ function displaySecondaryChart() {
         console.log('stepCoords returns:', stepCoords);
         getElevationP(stepCoords).then(elevationArr=>{
             formatStepElevationChart(elevationArr)
+        }).catch(err=>{
+            //TODO display an error message and clear the charts
+            console.error('getElevationP ERROR', err)
         });
     });
 }
