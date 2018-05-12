@@ -1,5 +1,8 @@
 'use strict';
 
+// NOTE this file is obsolete, index2 replaces it
+// TODO remove this file
+
 const googleElevationURL = 'https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/elevation/json?'
 
 const directionsURL = 'https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?'
@@ -22,11 +25,11 @@ function getDirections(origin, destination, callback) {
 
 function getElevationData(pathPoints, callback) {
 
-    
+
     if(pathPoints.length>1){
-    const half = Math.floor(pathPoints.length/2)   
-    const firstHalfArr = pathPoints.slice(0, half) 
-    const secondHalfArr = pathPoints.slice(half, pathPoints.length) 
+    const half = Math.floor(pathPoints.length/2)
+    const firstHalfArr = pathPoints.slice(0, half)
+    const secondHalfArr = pathPoints.slice(half, pathPoints.length)
 
     const queryOne = {
         'locations': givePath(firstHalfArr),
@@ -42,7 +45,7 @@ function getElevationData(pathPoints, callback) {
     const p2 = $.getJSON(googleElevationURL, queryTwo)
 
     Promise.all([p1,p2]).then(responses=>{
-        
+
         const finalResults = [].concat(responses[0].results).concat(responses[1].results)
         console.log('finalresults returns:',responses)
         callback(finalResults)
@@ -79,7 +82,7 @@ let pathArray = [];
 
 function buildPathArray(result) {
     for (let i = 0; i < result.legs[0].steps.length; i++) {
-        
+
         let latitude = result.legs[0].steps[i].start_location.lat;
         let longitude = result.legs[0].steps[i].start_location.lng;
         let polyLine = result.legs[0].steps[i].polyline.points;
@@ -265,8 +268,8 @@ var stepsChart = new Chart(stepsContent, {
 function reducePolyPoints(arr) {
     const MAX = 512;
     let step = 1;
-    if (arr.length > MAX) {
-        step = Math.ceil(arr.length / MAX);
+    if (arr.length > maxValue) {
+        step = Math.ceil(arr.length / maxValue);
     }
 
     const sampledArr = [];
@@ -321,7 +324,7 @@ function initialize() {
     var input2 = document.getElementById('endDirection');
     new google.maps.places.Autocomplete(input2);
 }
-  
+
 google.maps.event.addDomListener(window, 'load', initialize);
 
 $(clearResults);
