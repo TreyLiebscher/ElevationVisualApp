@@ -17,8 +17,8 @@ function getDirectionsP(origin, destination) {
 function getElevationP(pathPoints) {
 
 
-    if(pathPoints.length>1){
-        const half = Math.floor(pathPoints.length/2)
+    if (pathPoints.length > 1) {
+        const half = Math.floor(pathPoints.length / 2)
         const firstHalfArr = pathPoints.slice(0, half)
         const secondHalfArr = pathPoints.slice(half, pathPoints.length)
 
@@ -35,10 +35,10 @@ function getElevationP(pathPoints) {
         const p1 = $.getJSON(googleElevationURL, queryOne)
         const p2 = $.getJSON(googleElevationURL, queryTwo)
 
-        return Promise.all([p1,p2]).then(responses=>{
+        return Promise.all([p1, p2]).then(responses => {
 
             const finalResults = [].concat(responses[0].results).concat(responses[1].results)
-            console.log('getElevationP returns:',finalResults)
+            console.log('getElevationP returns:', finalResults)
             return finalResults
         })
 
@@ -48,7 +48,9 @@ function getElevationP(pathPoints) {
         'locations': getPathStr(pathPoints),
         key: 'AIzaSyD819M3CdI9bJbgpG8T_Exb9Hxbsy0Jd5Q'
     }
-    return $.getJSON(googleElevationURL, query).then(response=>{return response.results});
+    return $.getJSON(googleElevationURL, query).then(response => {
+        return response.results
+    });
 }
 
 
@@ -102,7 +104,7 @@ function decode(encoded) {
 
 // If decoded polyPoints exceed the 512 location limit in Google Elevation API
 function reducePolyPoints(arr, max) {
-     maxValue = max || 512;
+    maxValue = max || 512;
     let step = 1;
     if (arr.length > maxValue) {
         step = Math.ceil(arr.length / maxValue);
@@ -118,7 +120,7 @@ function reducePolyPoints(arr, max) {
 }
 
 function buildPathArray(steps) {
-    const returnArr=[]
+    const returnArr = []
     for (let i = 0; i < steps.length; i++) {
 
         let latitude = steps[i].start_location.lat;

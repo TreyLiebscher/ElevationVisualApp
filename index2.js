@@ -22,22 +22,22 @@ function displayDirections(arr) {
 function formatElevationChart(data) {
 
     console.log('data returns:', data);
-    const results = data.map((item, index) => renderDataSet(item));
+    const results = data.map((item, index) => renderDataSet(item, index));
 
 }
 
-function renderDataSet(result) {
-    let labels = Math.floor(result.elevation/10);
+function renderDataSet(result, index) {
+    let labels = index + 1;
     addData(chart, labels, result.elevation);
 }
 
 // SECONDARY CHART
 function formatStepElevationChart(data) {
-    const results = data.map((item, index) => renderStepData(item));
+    const results = data.map((item, index) => renderStepData(item, index));
 }
 
-function renderStepData(result) {
-    let labels = Math.floor(result.elevation/10);
+function renderStepData(result, index) {
+    let labels = '';
     addData(stepsChart, labels, result.elevation);
 }
 
@@ -69,7 +69,7 @@ var chart = new Chart(ctx, {
         labels: [],
         datasets: [{
             label: "Journey Elevation (meters)",
-            borderColor: 'rgb(255, 99, 132)',
+            borderColor: '#50b4db',
             data: []
         }]
     },
@@ -88,7 +88,7 @@ var stepsChart = new Chart(stepsContent, {
         labels: [],
         datasets: [{
             label: "Step Elevation (meters)",
-            borderColor: 'rgb(9, 214, 2)',
+            borderColor: '#e79f31',
             data: []
         }]
     },
@@ -102,13 +102,16 @@ function displaySecondaryChart() {
     $('.directionListItem').on('click', function (event) {
         event.preventDefault();
         removeData(stepsChart);
-        let xxx = decode(this.id);
-        let stepCoords = reducePolyPoints(xxx, 100);
+        $(this).toggleClass('activeDirectionListItem');
+        let decodedPolyPoints = decode(this.id);
+        let stepCoords = reducePolyPoints(decodedPolyPoints, 100);
         console.log('stepCoords returns:', stepCoords);
-        getElevationP(stepCoords).then(elevationArr=>{
+        getElevationP(stepCoords).then(elevationArr => {
             formatStepElevationChart(elevationArr)
-        }).catch(err=>{
+        }).catch(err => {
             //TODO display an error message and clear the charts
+            alert('Something went wrong, please try again');
+            clearResults();
             console.error('getElevationP ERROR', err)
         });
     });
@@ -126,9 +129,11 @@ function watchGo() {
         const dpromise = getDirectionsP(origin, destination)
 
         //if something bad happens...
-        dpromise.catch(err=>{
+        dpromise.catch(err => {
 
             //TODO display an error message and clear the charts
+            alert('Something went wrong, please try again');
+            clearResults();
             console.error('ERROR', err)
         })
 
@@ -159,6 +164,15 @@ function clearResults() {
         $('.directionInput').val('');
     });
 }
+
+// Loading Icon
+$(document)
+.ajaxStart(function(){
+    $("#loading").show();
+})
+.ajaxStop(function(){
+    $("#loading").hide();
+});
 
 // Autocomplete
 

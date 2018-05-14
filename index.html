@@ -7,38 +7,36 @@
     <title>Elevation Visualizer</title>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiRNwf8WgICxkJExjBvQQuqVJ-RSS1hXA&libraries=places,geometry"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-
     <link href="main.css" rel="stylesheet" type="text/css" />
-    <link href="https://fonts.googleapis.com/css?family=Alegreya+SC:800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700" rel="stylesheet">
 </head>
 
 <body>
     <main>
         <h1>Elevation Visualizer</h1>
         <section role='region' class='controlHolder'>
-        <form id="js-direction-form">
-            <input id='startDirection' class='directionInput' placeholder='enter your starting address' required>
-            <input id='endDirection' class='directionInput' placeholder='enter your destination' required>
-            <button type='submit' id='directionSubmit'>Go</button>
-            <button type='button' class='js-clearResults'>Clear</button>
-        </form>
+            <form id="js-direction-form">
+                <input id='startDirection' class='directionInput' placeholder='enter your starting address' required>
+                <input id='endDirection' class='directionInput' placeholder='enter your destination' required>
+                <button type='submit' id='directionSubmit'>Go</button>
+                <button type='button' class='js-clearResults'>Clear</button>
+            </form>
         </section>
-        <section role='region' class='visualHolder'>
-        <div class='chartHolder'>
-            <canvas id="myChart"></canvas>
-            <canvas id="stepsChart"></canvas>
+        <div class='loadingHolder'>
+        <a href="https://imgur.com/Gq9ySGu"><img src="https://i.imgur.com/Gq9ySGu.gif" title="source: imgur.com" id='loading' /></a>
         </div>
-        <ol id="js-direction-result">
-        </ol>
+        <section role='region' class='visualHolder'>
+            <div class='chartHolder'>
+                <canvas id="myChart"></canvas>
+                <canvas id="stepsChart"></canvas>
+            </div>
+            <ol id="js-direction-result">
+            </ol>
         </section>
-
-
     </main>
-    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiRNwf8WgICxkJExjBvQQuqVJ-RSS1hXA&libraries=places,geometry"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <script src="util.js"></script>
     <script src="index2.js"></script>
-
 </body>
 
 </html>
