@@ -8,7 +8,7 @@ body {
     height: 100%;
     margin: auto;
     width: 95%;
-    background-color: #fcf4ae;
+    background-color: #6b97b7;
 }
 
 h1 {
@@ -65,16 +65,59 @@ h1 {
     text-align: center;
 }
 
+.activeDirectionListItem {
+    background-color: #e79f31;
+}
+
+.visualHolder {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 90vw;
+    border-radius: 7px;
+    position: relative;
+    background-color: #78aace;
+}
+
+
+
+
+.mainChartHolder,
+.stepsChartHolder {
+    height: 33.33vh;
+    width: 100%;
+}
+
+.directionContainer {
+    overflow-y: scroll;
+    height: 33.33vh;
+    width: 100%;
+}
+
+
 @media only screen and (min-width: 640px) {
     .visualHolder {
-        display: flex;
+        /* display: flex; */
         flex-direction: row;
-        width: 100%;
-        padding: 2%;
+        height: 60vh;
+        /* background-color: #78aace; */
+        /* border-radius: 7px; */
+        padding: 0 5px 0 5px;
+        /* width: 90vw; */
     }
-    .chartHolder {
-        width: 75%;
+   
+    .mainChartHolder,
+    .stepsChartHolder {
+        position: relative;
+        height: 100%;
+        width: 40%;
     }
+
+    .directionContainer {
+        width: 20%;
+        height: 100%;
+    }
+
 
     .directionListItem {
         border: 1px solid black;
@@ -113,8 +156,5 @@ h1 {
         cursor: pointer;
         filter: brightness(110%);
     }
-    .activeDirectionListItem {
-        background-color: #e79f31;
-        color: white;
-    }
+
 }

@@ -13,7 +13,7 @@
 
 <body>
     <main>
-        <h1>Elevation Visualizer</h1>
+        <h1>ELEVATION VISUALIZER</h1>
         <section role='region' class='controlHolder'>
             <form id="js-direction-form">
                 <input id='startDirection' class='directionInput' placeholder='enter your starting address' required>
@@ -23,15 +23,21 @@
             </form>
         </section>
         <div class='loadingHolder'>
-        <a href="https://imgur.com/Gq9ySGu"><img src="https://i.imgur.com/Gq9ySGu.gif" title="source: imgur.com" id='loading' /></a>
+            <a href="https://imgur.com/OHBulv9"><img src="https://i.imgur.com/OHBulv9.gif" title="source: imgur.com" id='loading'/></a>
         </div>
         <section role='region' class='visualHolder'>
-            <div class='chartHolder'>
-                <canvas id="myChart"></canvas>
-                <canvas id="stepsChart"></canvas>
+
+                <div class='mainChartHolder'>
+                    <canvas id="myChart"></canvas>
+                </div>
+                <div class='stepsChartHolder'>
+                    <canvas id="stepsChart"></canvas>
+                </div>
+
+            <div class='directionContainer'>
+                <ol id="js-direction-result">
+                </ol>
             </div>
-            <ol id="js-direction-result">
-            </ol>
         </section>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>

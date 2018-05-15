@@ -1,10 +1,5 @@
 'use strict';
 
-const startInput = $('#startDirection');
-
-const endInput = $('#endDirection');
-
-
 function directionRender(result) {
     return `
     <li class='directionListItem' id='${result.poly}'>${result.directions} (${result.distance})</li>
@@ -75,7 +70,10 @@ var chart = new Chart(ctx, {
     },
 
 
-    options: {}
+    options: {
+        responsive: true,
+        maintainAspectRatio: false
+    }
 });
 // The secondary chart for each step of journey
 var stepsContent = document.getElementById('stepsChart').getContext('2d');
@@ -94,7 +92,10 @@ var stepsChart = new Chart(stepsContent, {
     },
 
 
-    options: {}
+    options: {
+        responsive: true,
+        maintainAspectRatio: false
+    }
 });
 
 
@@ -102,7 +103,7 @@ function displaySecondaryChart() {
     $('.directionListItem').on('click', function (event) {
         event.preventDefault();
         removeData(stepsChart);
-        $(this).toggleClass('activeDirectionListItem');
+        $(this).toggleClass('activeDirectionListItem').siblings().removeClass('activeDirectionListItem');
         let decodedPolyPoints = decode(this.id);
         let stepCoords = reducePolyPoints(decodedPolyPoints, 100);
         console.log('stepCoords returns:', stepCoords);
