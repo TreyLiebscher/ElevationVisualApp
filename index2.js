@@ -65,6 +65,7 @@ var chart = new Chart(ctx, {
         datasets: [{
             label: "Journey Elevation (meters)",
             borderColor: '#50b4db',
+            backgroundColor: '#377f9b',
             data: []
         }]
     },
@@ -72,9 +73,26 @@ var chart = new Chart(ctx, {
 
     options: {
         responsive: true,
-        maintainAspectRatio: false
+        maintainAspectRatio: false,
+        scales: {
+            xAxes: [{
+              display: true,
+              gridLines: {
+                display: true,
+                color: '#000000'
+              }
+            }],
+            yAxes: [{
+              display: true,
+              gridLines: {
+                display: true,
+                color: '#000000'
+              }
+            }]} 
     }
+
 });
+
 // The secondary chart for each step of journey
 var stepsContent = document.getElementById('stepsChart').getContext('2d');
 var stepsChart = new Chart(stepsContent, {
@@ -87,6 +105,7 @@ var stepsChart = new Chart(stepsContent, {
         datasets: [{
             label: "Step Elevation (meters)",
             borderColor: '#e79f31',
+            backgroundColor: '#af7824',
             data: []
         }]
     },
@@ -94,8 +113,24 @@ var stepsChart = new Chart(stepsContent, {
 
     options: {
         responsive: true,
-        maintainAspectRatio: false
+        maintainAspectRatio: false,
+        scales: {
+            xAxes: [{
+              display: true,
+              gridLines: {
+                display: true,
+                color: '#000000'
+              }
+            }],
+            yAxes: [{
+              display: true,
+              gridLines: {
+                display: true,
+                color: '#000000'
+              }
+            }]} 
     }
+
 });
 
 
@@ -169,10 +204,10 @@ function clearResults() {
 // Loading Icon
 $(document)
 .ajaxStart(function(){
-    $("#loading").show();
+    $(".loadingHolder").show();
 })
 .ajaxStop(function(){
-    $("#loading").hide();
+    $(".loadingHolder").hide();
 });
 
 // Autocomplete

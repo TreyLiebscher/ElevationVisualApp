@@ -3,17 +3,25 @@
     font-family: 'Open Sans Condensed', sans-serif;
 }
 
+html {
+    background: url('https://i.imgur.com/mzaDnzx.jpg') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
 html,
 body {
     height: 100%;
     margin: auto;
     width: 95%;
-    background-color: #6b97b7;
 }
 
 h1 {
     width: 100%;
     text-align: center;
+    color: white;
 }
 
 .controlHolder {
@@ -58,11 +66,23 @@ h1 {
 }
 
 #loading {
-    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
 }
 
 .loadingHolder {
     text-align: center;
+    width: 90vw;
+    height: 100vh;
+    border: 3px solid white;
+    background-color: #ffffffb0;
+    position: absolute;
+    z-index: 1;
+    display: none;
 }
 
 .activeDirectionListItem {
@@ -76,7 +96,7 @@ h1 {
     width: 90vw;
     border-radius: 7px;
     position: relative;
-    background-color: #78aace;
+    background-color: #ffffffb0;
 }
 
 
@@ -90,6 +110,7 @@ h1 {
 
 .directionContainer {
     overflow-y: scroll;
+    padding-right: 2px;
     height: 33.33vh;
     width: 100%;
 }
@@ -97,13 +118,9 @@ h1 {
 
 @media only screen and (min-width: 640px) {
     .visualHolder {
-        /* display: flex; */
         flex-direction: row;
         height: 60vh;
-        /* background-color: #78aace; */
-        /* border-radius: 7px; */
         padding: 0 5px 0 5px;
-        /* width: 90vw; */
     }
    
     .mainChartHolder,
@@ -155,6 +172,10 @@ h1 {
     .js-clearResults:hover {
         cursor: pointer;
         filter: brightness(110%);
+    }
+
+    .loadingHolder {
+        height: 60vh;
     }
 
 }
