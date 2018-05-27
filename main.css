@@ -45,9 +45,16 @@ h1 {
     background-color: #e79f31;
 }
 
+.formLabels {
+    color: white;
+    text-align: left;
+    width: 50%;
+    margin: auto;
+}
+
 #directionSubmit,
 .js-clearResults {
-    width: 95%;
+    width: 49%;
     height: 40px;
     border-radius: 7px;
     font-size: 18px;
@@ -59,6 +66,25 @@ h1 {
 #directionSubmit,
 .js-clearResults {
     margin: auto auto 1% auto;
+}
+
+
+.viewModeHolder {
+    justify-content: center;
+    margin: 0 auto 2% auto;
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+}
+
+.viewButtons {
+    display: block;
+    border: none;
+    border-radius: 5px;
+    background-color: gray;
+    font-size: 14px;
+    color: white;
+    margin-bottom: 1%;
 }
 
 .directionListItem {
@@ -89,16 +115,53 @@ h1 {
     background-color: #e79f31;
 }
 
-.visualHolder {
+.contentHolder {
     display: flex;
     flex-direction: column;
     height: 100vh;
     width: 90vw;
     border-radius: 7px;
-    position: relative;
-    background-color: #ffffffb0;
+    background-color: #ffffffad;
+    margin-bottom: 2%;
 }
 
+.aboutContainer {
+    height: 90vh;
+    width: 90vw;
+    z-index: 1;
+    background-color: white;
+    position: absolute;
+    top: 20px;
+    overflow-y: scroll;
+    border-radius: 5px;
+    display: none;
+}
+
+.aboutDirections {
+    list-style: none;
+}
+
+#js-close-about {
+    width: 50vw;
+    height: 5vh;
+    border: none;
+    background-color: #50b4db;
+    font-size: 20px;
+    color: white;
+}
+
+.exampleImg {
+    height: 100%;
+    width: 100%;
+}
+
+.directionContainerRead {
+    display: none;
+}
+
+.aboutElevationVisual {
+    text-align: center;
+}
 
 
 
@@ -115,9 +178,82 @@ h1 {
     width: 100%;
 }
 
+.directionContainer::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+.directionContainer::-webkit-scrollbar:vertical {
+    width: 10px;
+}
+
+.directionContainer::-webkit-scrollbar:horizontal {
+    height: 10px;
+}
+
+.directionContainer::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    border: 2px solid white;
+    background-color: rgba(0, 0, 0, .5);
+}
+
+.directionContainer::-webkit-scrollbar-track { 
+    background-color: #fff; 
+    border-radius: 8px; 
+} 
+
+.directionContainer .scrollDirections {
+    text-align: center;
+    font-size: 12px;
+    font-style: italic;
+}
+
+
+
+.js-a11y-view-container {
+    display: none;
+    position: absolute;
+    background-color: white;
+    height: 60vh;
+    overflow-y: scroll;
+}
+
+.a11yTableHolder {
+    display: flex;
+    flex-direction: row;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 6px;
+    height: 3vh;
+}
+
+
+
+
+.exampleHolder {
+    /* border: 1px solid black; */
+    width: 100vw;
+    /* margin: 10px auto 10px auto; */
+}
+
+.a11yTableData {
+    height: 10vh;
+}
 
 @media only screen and (min-width: 640px) {
-    .visualHolder {
+    
+    h1 {
+        font-size: 40px;
+    }
+
+    .exampleHolder {
+        width: 50vw;
+        margin: 10px auto 10px auto;
+    }
+    
+    .contentHolder {
         flex-direction: row;
         height: 60vh;
         padding: 0 5px 0 5px;
@@ -169,9 +305,41 @@ h1 {
     }
    
     #directionSubmit:hover,
-    .js-clearResults:hover {
+    #directionSubmit:focus,
+    .js-clearResults:hover,
+    .js-clearResults:focus,
+    #js-close-about:hover,
+    #js-close-about:focus {
         cursor: pointer;
         filter: brightness(110%);
+    }
+
+    .viewModeHolder {
+        flex-direction: row;
+    }
+
+    
+
+    /* #js-standard-view:hover,
+    #js-standard-view:focus,
+    #js-a11yFriendlyView:hover,
+    #js-a11yFriendlyView:focus,
+    #js-about:hover,
+    #js-about:focus {
+        cursor: pointer;
+        background-color: white;
+    } */
+
+    .viewButtons {
+        width: 10vw;
+        margin-right: 2%;
+    }
+
+    .viewButtons:hover,
+    .viewButtons:focus {
+        cursor: pointer;
+        background-color: white;
+        color: black;
     }
 
     .loadingHolder {

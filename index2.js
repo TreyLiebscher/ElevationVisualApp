@@ -145,7 +145,6 @@ function displaySecondaryChart() {
         getElevationP(stepCoords).then(elevationArr => {
             formatStepElevationChart(elevationArr)
         }).catch(err => {
-            //TODO display an error message and clear the charts
             alert('Something went wrong, please try again');
             clearResults();
             console.error('getElevationP ERROR', err)
@@ -162,12 +161,12 @@ function watchGo() {
         const destination = findDest.val();
         removeData(chart);
         removeData(stepsChart)
+        $('.js-a11y-directions').empty();
+        $('.js-a11y-elevation').empty();
         const dpromise = getDirectionsP(origin, destination)
 
         //if something bad happens...
         dpromise.catch(err => {
-
-            //TODO display an error message and clear the charts
             alert('Something went wrong, please try again');
             clearResults();
             console.error('ERROR', err)
@@ -180,12 +179,15 @@ function watchGo() {
             const pathArr = buildPathArray(steps)
 
             displayDirections(pathArr)
+            displayA11yFriendlyDirections(pathArr)
             displaySecondaryChart()
 
             //go fetch elevation and return that promise so we can cascade catch the errors
             return getElevationP(pathArr).then(elevationArr => {
                 console.log('Got journey elevation', elevationArr)
                 formatElevationChart(elevationArr)
+                $('.directionContainer').scrollTop(1).scrollTop(0);
+                displayA11yFriendlyElevation(elevationArr)
             })
         })
     })
@@ -201,6 +203,48 @@ function clearResults() {
     });
 }
 
+function displayAboutSection() {
+    $('#js-about').on('click', function (event) {
+        event.preventDefault();
+        $('.aboutContainer').show();
+    });
+}
+
+function displayA11yFriendlyView() {
+    $('#js-a11yFriendlyView').on('click', function(event) {
+        event.preventDefault();
+        $('.mainChartHolder').hide();
+        $('.stepsChartHolder').hide();
+        $('.directionContainer').hide();
+        $('.js-a11y-view-container').show();
+    });
+}
+
+function displayStandardView() {
+    $('#js-standard-view').on('click', function(event) {
+        event.preventDefault();
+        $('.js-a11y-view-container').hide();
+        $('.mainChartHolder').show();
+        $('.stepsChartHolder').show();
+        $('.directionContainer').show();
+    })
+}
+
+$(document).on('click', '#js-close-about', function() {
+    $(this).parent().parent().hide();
+});
+
+$(()=>{
+    const popupWasShown = Cookies.get('popupWasShown')
+    console.log('popupWasShown', popupWasShown)
+    if(!popupWasShown){
+      Cookies.set('popupWasShown', true)
+      $('.aboutContainer').show();
+    }
+  })
+
+  
+
 // Loading Icon
 $(document)
 .ajaxStart(function(){
@@ -210,8 +254,9 @@ $(document)
     $(".loadingHolder").hide();
 });
 
-// Autocomplete
 
+
+// Autocomplete
 function initialize() {
     var input1 = document.getElementById('startDirection');
     new google.maps.places.Autocomplete(input1);
@@ -221,5 +266,15 @@ function initialize() {
 
 google.maps.event.addDomListener(window, 'load', initialize);
 
-$(clearResults);
-$(watchGo);
+// Display about section for first-time users
+// use cookies
+
+function handleElevationAppEvents() {
+    $(displayAboutSection);
+    $(displayStandardView);
+    $(displayA11yFriendlyView);
+    $(clearResults);
+    $(watchGo);
+}
+
+$(handleElevationAppEvents);

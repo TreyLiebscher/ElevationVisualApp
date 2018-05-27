@@ -67,6 +67,7 @@ function getPathStr(arr) {
 
 
 //Used to decode encoded polylines along a route
+//Source: https://gist.github.com/ismaels/6636986
 function decode(encoded) {
     var points = []
     var index = 0,
@@ -138,4 +139,56 @@ function buildPathArray(steps) {
         returnArr.push(pathPoint);
     }
     return returnArr
+}
+
+function renderA11yFriendlyDirections(result) {
+    return `
+    <tr class='a11yTableData'>
+        <td>${result.directions}</td>
+        <td>${result.distance}</td>
+    </tr>
+    `
+}
+
+function renderA11yViewDirectionsHeader() {
+    return `
+    <tr>
+    <th scope="col">Directions</th>
+    <th scope="col">Distance</th>
+    </tr>
+    `
+}
+
+function displayA11yFriendlyDirections(arr) {
+    const results = arr.map((item) => renderA11yFriendlyDirections(item));
+    const resultsHeader = renderA11yViewDirectionsHeader();
+    $('.js-a11y-directions').append(resultsHeader, results);
+}
+
+function renderA11yFriendlyElevation(result) {
+    return `
+    <tr class='a11yTableData'>
+        <td>${result.elevation}</td>
+    </tr>
+    `
+}
+
+function renderA11yViewElevationHeader() {
+    return `
+    <tr>
+        <th scope="col">Elevation</th>
+    </tr>
+    `
+}
+
+function displayA11yFriendlyElevation(arr) {
+    const results = arr.map((item) => renderA11yFriendlyElevation(item));
+    const resultsHeader = renderA11yViewElevationHeader();
+    $('.js-a11y-elevation').append(resultsHeader, results);
+}
+
+function displayA11yFriendlyTable(arr1, arr2) {
+    const directionResults = arr1.map((item) => renderA11yFriendlyDirections(item));
+    const elevationResults = arr2.map((item) => renderA11yFriendlyElevation(item));
+    const finalResults = directionResults + elevationResults;
 }
