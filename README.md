@@ -1,4 +1,4 @@
-<!-- # Elevation Visualizer
+# Elevation Visualizer
 
 Live app: https://treyliebscher.github.io/ElevationVisualApp/
 
