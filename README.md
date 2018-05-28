@@ -2,7 +2,7 @@ Elevation Visualizer
 
 Live app: https://treyliebscher.github.io/ElevationVisualApp/
 
-Screenshot: https://i.imgur.com/rwSBrZe.png
+![alt text](https://i.imgur.com/rwSBrZe.png)
 
 The Elevation Visualizer allows users to enter a starting address and a destination in order to receive visual feedback on the actual elevation that will be encountered while driving along the route. Users can see, in great detail, the actual peaks and valleys of a specific road by clicking on the box containing that part of the directions. 
 
