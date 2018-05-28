@@ -16,7 +16,7 @@ function getDirectionsP(origin, destination) {
 
 function getElevationP(pathPoints) {
 
-
+    // splits URL in half so it will not exceed length limit
     if (pathPoints.length > 1) {
         const half = Math.floor(pathPoints.length / 2)
         const firstHalfArr = pathPoints.slice(0, half)
@@ -61,7 +61,6 @@ function getPathStr(arr) {
         pathCoordsArr.push(chunkStr)
     }
     const retStr = pathCoordsArr.join('|')
-    // console.log('getPathStr returns:', retStr)
     return retStr
 }
 
@@ -120,6 +119,7 @@ function reducePolyPoints(arr, max) {
     return sampledArr;
 }
 
+// builds new object from API results that this app can work with 
 function buildPathArray(steps) {
     const returnArr = []
     for (let i = 0; i < steps.length; i++) {
@@ -141,9 +141,10 @@ function buildPathArray(steps) {
     return returnArr
 }
 
+// the following are used for building the a11y friendly table
 function renderA11yFriendlyDirections(result) {
     return `
-    <tr class='a11yTableData'>
+    <tr class="a11yTableData">
         <td>${result.directions}</td>
         <td>${result.distance}</td>
     </tr>
@@ -167,7 +168,7 @@ function displayA11yFriendlyDirections(arr) {
 
 function renderA11yFriendlyElevation(result) {
     return `
-    <tr class='a11yTableData'>
+    <tr class="a11yTableData">
         <td>${result.elevation}</td>
     </tr>
     `
@@ -185,10 +186,4 @@ function displayA11yFriendlyElevation(arr) {
     const results = arr.map((item) => renderA11yFriendlyElevation(item));
     const resultsHeader = renderA11yViewElevationHeader();
     $('.js-a11y-elevation').append(resultsHeader, results);
-}
-
-function displayA11yFriendlyTable(arr1, arr2) {
-    const directionResults = arr1.map((item) => renderA11yFriendlyDirections(item));
-    const elevationResults = arr2.map((item) => renderA11yFriendlyElevation(item));
-    const finalResults = directionResults + elevationResults;
 }

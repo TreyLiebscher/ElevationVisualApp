@@ -13,7 +13,7 @@ function displayDirections(arr) {
 }
 
 
-// MAIN CHART
+// build MAIN CHART
 function formatElevationChart(data) {
 
     console.log('data returns:', data);
@@ -26,7 +26,7 @@ function renderDataSet(result, index) {
     addData(chart, labels, result.elevation);
 }
 
-// SECONDARY CHART
+// build SECONDARY CHART
 function formatStepElevationChart(data) {
     const results = data.map((item, index) => renderStepData(item, index));
 }
@@ -36,7 +36,7 @@ function renderStepData(result, index) {
     addData(stepsChart, labels, result.elevation);
 }
 
-
+// adding data to harts
 function addData(chart, label, data) {
     chart.data.labels.push(label);
     chart.data.datasets.forEach((dataset) => {
@@ -45,6 +45,7 @@ function addData(chart, label, data) {
     chart.update();
 }
 
+// removing data from charts
 function removeData(chart) {
     chart.data.labels.splice(0, chart.data.labels.length)
     chart.data.datasets.forEach((dataset) => {
@@ -63,7 +64,7 @@ var chart = new Chart(ctx, {
     data: {
         labels: [],
         datasets: [{
-            label: "Journey Elevation (meters)",
+            label: 'Journey Elevation (meters)',
             borderColor: '#50b4db',
             backgroundColor: '#377f9b',
             data: []
@@ -76,19 +77,20 @@ var chart = new Chart(ctx, {
         maintainAspectRatio: false,
         scales: {
             xAxes: [{
-              display: true,
-              gridLines: {
                 display: true,
-                color: '#000000'
-              }
+                gridLines: {
+                    display: true,
+                    color: '#000000'
+                }
             }],
             yAxes: [{
-              display: true,
-              gridLines: {
                 display: true,
-                color: '#000000'
-              }
-            }]} 
+                gridLines: {
+                    display: true,
+                    color: '#000000'
+                }
+            }]
+        }
     }
 
 });
@@ -103,7 +105,7 @@ var stepsChart = new Chart(stepsContent, {
     data: {
         labels: [],
         datasets: [{
-            label: "Step Elevation (meters)",
+            label: 'Step Elevation (meters)',
             borderColor: '#e79f31',
             backgroundColor: '#af7824',
             data: []
@@ -116,23 +118,23 @@ var stepsChart = new Chart(stepsContent, {
         maintainAspectRatio: false,
         scales: {
             xAxes: [{
-              display: true,
-              gridLines: {
                 display: true,
-                color: '#000000'
-              }
+                gridLines: {
+                    display: true,
+                    color: '#000000'
+                }
             }],
             yAxes: [{
-              display: true,
-              gridLines: {
                 display: true,
-                color: '#000000'
-              }
-            }]} 
+                gridLines: {
+                    display: true,
+                    color: '#000000'
+                }
+            }]
+        }
     }
 
 });
-
 
 function displaySecondaryChart() {
     $('.directionListItem').on('click', function (event) {
@@ -199,6 +201,8 @@ function clearResults() {
         $('#js-direction-result').html('');
         removeData(chart);
         removeData(stepsChart);
+        $('.js-a11y-directions').empty();
+        $('.js-a11y-elevation').empty();
         $('.directionInput').val('');
     });
 }
@@ -211,7 +215,7 @@ function displayAboutSection() {
 }
 
 function displayA11yFriendlyView() {
-    $('#js-a11yFriendlyView').on('click', function(event) {
+    $('#js-a11yFriendlyView').on('click', function (event) {
         event.preventDefault();
         $('.mainChartHolder').hide();
         $('.stepsChartHolder').hide();
@@ -221,7 +225,7 @@ function displayA11yFriendlyView() {
 }
 
 function displayStandardView() {
-    $('#js-standard-view').on('click', function(event) {
+    $('#js-standard-view').on('click', function (event) {
         event.preventDefault();
         $('.js-a11y-view-container').hide();
         $('.mainChartHolder').show();
@@ -230,31 +234,28 @@ function displayStandardView() {
     })
 }
 
-$(document).on('click', '#js-close-about', function() {
+$(document).on('click', '#js-close-about', function () {
     $(this).parent().parent().hide();
 });
 
-$(()=>{
+// Display about section for first-time users
+$(() => {
     const popupWasShown = Cookies.get('popupWasShown')
     console.log('popupWasShown', popupWasShown)
-    if(!popupWasShown){
-      Cookies.set('popupWasShown', true)
-      $('.aboutContainer').show();
+    if (!popupWasShown) {
+        Cookies.set('popupWasShown', true)
+        $('.aboutContainer').show();
     }
-  })
-
-  
+})
 
 // Loading Icon
 $(document)
-.ajaxStart(function(){
-    $(".loadingHolder").show();
-})
-.ajaxStop(function(){
-    $(".loadingHolder").hide();
-});
-
-
+    .ajaxStart(function () {
+        $('.loadingHolder').show();
+    })
+    .ajaxStop(function () {
+        $('.loadingHolder').hide();
+    });
 
 // Autocomplete
 function initialize() {
@@ -265,9 +266,6 @@ function initialize() {
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
-
-// Display about section for first-time users
-// use cookies
 
 function handleElevationAppEvents() {
     $(displayAboutSection);

@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>Elevation Visualizer</title>
-    <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDiRNwf8WgICxkJExjBvQQuqVJ-RSS1hXA&libraries=places,geometry'></script>
-    <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
-    <script src='https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js'></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiRNwf8WgICxkJExjBvQQuqVJ-RSS1hXA&libraries=places,geometry"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     <link href="main.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700" rel="stylesheet">
 </head>
@@ -15,44 +15,43 @@
 <body>
     <main>
         <h1>ELEVATION VISUALIZER</h1>
-        <!-- <button type='button' id='js-about'>?</button> -->
-        <section role='region' class='controlHolder'>
+        <section role="region" class="controlHolder">
             <form id="js-direction-form">
                 <label for="startDirection" class="formLabels">Starting Point</label>
-                <input id='startDirection' class='directionInput' placeholder='enter your starting address' required>
+                <input id="startDirection" class="directionInput" placeholder="enter your starting address" required>
                 <label for="endDirection" class="formLabels">Destination</label>
-                <input id='endDirection' class='directionInput' placeholder='enter your destination' required>
-                <button type='submit' id='directionSubmit'>Go</button>
-                <button type='button' class='js-clearResults'>Clear</button>
+                <input id="endDirection" class="directionInput" placeholder="enter your destination" required>
+                <button type="submit" id="directionSubmit">Go</button>
+                <button type="button" class="js-clearResults">Clear</button>
             </form>
         </section>
-        <section role='region' class='viewModeHolder'>
-            <button type='button' id='js-standard-view' class="viewButtons">Standard View</button>
-            <button type='button' id='js-a11yFriendlyView' class="viewButtons">Visually Impaired Users</button>
-            <button type='button' id='js-about' class="viewButtons">?</button>
+        <section role="region" class="viewModeHolder">
+            <button type="button" id="js-standard-view" class="viewButtons">Standard View</button>
+            <button type="button" id="js-a11yFriendlyView" class="viewButtons">Visually Impaired Users</button>
+            <button type="button" id="js-about" class="viewButtons">?</button>
         </section>
-        <div class='loadingHolder'>
-            <img src="https://i.imgur.com/QZhjGdU.gif" title="source: imgur.com" id='loading' />
+        <div class="loadingHolder">
+            <img src="https://i.imgur.com/QZhjGdU.gif" title="source: imgur.com" id="loading" />
         </div>
-        <section role='region' class='contentHolder'>
+        <section role="region" class="contentHolder">
 
-                <div class='mainChartHolder' aria-hidden="true">
-                    <canvas id="myChart"></canvas>
-                </div>
-                <div class='stepsChartHolder' aria-hidden="true">
-                    <canvas id="stepsChart"></canvas>
-                </div>
-                <div class='directionContainer' aria-hidden="true">
-                    <p class='scrollDirections'>Scroll to see more directions</p>
-                    <ol id="js-direction-result">
-                    </ol>
-                </div>
+            <div class="mainChartHolder" aria-hidden="true">
+                <canvas id="myChart"></canvas>
+            </div>
+            <div class="stepsChartHolder" aria-hidden="true">
+                <canvas id="stepsChart"></canvas>
+            </div>
+            <div class="directionContainer" aria-hidden="true">
+                <p class="scrollDirections">Scroll to see more directions</p>
+                <ol id="js-direction-result">
+                </ol>
+            </div>
 
-            <div class='js-a11y-view-container' role="hidden">
-                <section role='region' class='a11yTableHolder'>
-                    <table class='js-a11y-directions'>
+            <div class="js-a11y-view-container" role="article">
+                <section role="region" class="a11yTableHolder">
+                    <table class="js-a11y-directions">
                     </table>
-                    <table class='js-a11y-elevation'>
+                    <table class="js-a11y-elevation">
                     </table>
                 </section>
             </div>
@@ -60,12 +59,12 @@
         </section>
 
 
-        <div class='aboutContainer'>
-            <section role='region' class='aboutElevationVisual'>
-                <h2 class='aboutHeader'>How to use the Elevation Visualizer</h2>
-                <p>If youve ever wondered what a trip youre planning on taking looks like in terms of elevation, this is the
+        <div class="aboutContainer">
+            <section role="region" class="aboutElevationVisual">
+                <h2 class="aboutHeader">How to use the Elevation Visualizer</h2>
+                <p>If you've ever wondered what a trip you're planning on taking looks like in terms of elevation, this is the
                     app for you!</p>
-                <ul class='aboutDirections'>
+                <ul class="aboutDirections">
                     <li>Enter your starting address and your destination then press Go</li>
                     <li>The blue graph represents elevation along your total journey. The x-axis represents the corresponding
                         direction maneuver while the y-axis represents the elevation at the starting point of that maneuver</li>
@@ -73,10 +72,10 @@
                         with an orange line. This graph represents the elevation along that part of the journey</li>
                     <li>Entering a new set of locations or clicking Clear will reset the app and allow you to start over</li>
                 </ul>
-                <div class='exampleHolder'>
-                    <img src='https://i.imgur.com/clwRK5M.png' class='exampleImg' alt='an example of the elevation visualizer in action'>
+                <div class="exampleHolder">
+                    <img src="https://i.imgur.com/clwRK5M.png" class="exampleImg" alt="an example of the elevation visualizer in action">
                 </div>
-                <button type='button' id='js-close-about'>Try it out!</button>
+                <button type="button" id="js-close-about">Try it out!</button>
             </section>
         </div>
 

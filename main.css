@@ -4,7 +4,7 @@
 }
 
 html {
-    background: url('https://i.imgur.com/mzaDnzx.jpg') no-repeat center center fixed; 
+    background: url('https://i.imgur.com/mzaDnzx.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -68,7 +68,6 @@ h1 {
     margin: auto auto 1% auto;
 }
 
-
 .viewModeHolder {
     justify-content: center;
     margin: 0 auto 2% auto;
@@ -128,7 +127,7 @@ h1 {
 .aboutContainer {
     height: 90vh;
     width: 90vw;
-    z-index: 1;
+    /* z-index: 1; */
     background-color: white;
     position: absolute;
     top: 20px;
@@ -163,8 +162,6 @@ h1 {
     text-align: center;
 }
 
-
-
 .mainChartHolder,
 .stepsChartHolder {
     height: 33.33vh;
@@ -196,18 +193,16 @@ h1 {
     background-color: rgba(0, 0, 0, .5);
 }
 
-.directionContainer::-webkit-scrollbar-track { 
-    background-color: #fff; 
-    border-radius: 8px; 
-} 
+.directionContainer::-webkit-scrollbar-track {
+    background-color: #fff;
+    border-radius: 8px;
+}
 
 .directionContainer .scrollDirections {
     text-align: center;
     font-size: 12px;
     font-style: italic;
 }
-
-
 
 .js-a11y-view-container {
     display: none;
@@ -222,20 +217,16 @@ h1 {
     flex-direction: row;
 }
 
-td, th {
+td,
+th {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 6px;
     height: 3vh;
 }
 
-
-
-
 .exampleHolder {
-    /* border: 1px solid black; */
     width: 100vw;
-    /* margin: 10px auto 10px auto; */
 }
 
 .a11yTableData {
@@ -243,35 +234,28 @@ td, th {
 }
 
 @media only screen and (min-width: 640px) {
-    
     h1 {
         font-size: 40px;
     }
-
     .exampleHolder {
         width: 50vw;
         margin: 10px auto 10px auto;
     }
-    
     .contentHolder {
         flex-direction: row;
         height: 60vh;
         padding: 0 5px 0 5px;
     }
-   
     .mainChartHolder,
     .stepsChartHolder {
         position: relative;
         height: 100%;
         width: 40%;
     }
-
     .directionContainer {
         width: 20%;
         height: 100%;
     }
-
-
     .directionListItem {
         border: 1px solid black;
         padding: 1%;
@@ -298,12 +282,10 @@ td, th {
         width: 50%;
         height: 35px;
     }
-
     #directionSubmit,
     .js-clearResults {
         width: 40%;
     }
-   
     #directionSubmit:hover,
     #directionSubmit:focus,
     .js-clearResults:hover,
@@ -313,37 +295,21 @@ td, th {
         cursor: pointer;
         filter: brightness(110%);
     }
-
     .viewModeHolder {
         flex-direction: row;
     }
-
-    
-
-    /* #js-standard-view:hover,
-    #js-standard-view:focus,
-    #js-a11yFriendlyView:hover,
-    #js-a11yFriendlyView:focus,
-    #js-about:hover,
-    #js-about:focus {
-        cursor: pointer;
-        background-color: white;
-    } */
 
     .viewButtons {
         width: 10vw;
         margin-right: 2%;
     }
-
     .viewButtons:hover,
     .viewButtons:focus {
         cursor: pointer;
         background-color: white;
         color: black;
     }
-
     .loadingHolder {
         height: 60vh;
     }
-
 }
