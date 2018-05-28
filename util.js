@@ -77,7 +77,7 @@ function decode(encoded) {
         var b, shift = 0,
             result = 0;
         do {
-            b = encoded.charAt(index++).charCodeAt(0) - 63; //finds ascii                                                                                    //and substract it by 63
+            b = encoded.charAt(index++).charCodeAt(0) - 63;
             result |= (b & 0x1f) << shift;
             shift += 5;
         } while (b >= 0x20);
@@ -166,24 +166,24 @@ function displayA11yFriendlyDirections(arr) {
     $('.js-a11y-directions').append(resultsHeader, results);
 }
 
-function renderA11yFriendlyElevation(result) {
-    return `
-    <tr class="a11yTableData">
-        <td>${result.elevation}</td>
-    </tr>
-    `
-}
+// function renderA11yFriendlyElevation(result) {
+//     return `
+//     <tr class="a11yTableData">
+//         <td>${result.elevation}</td>
+//     </tr>
+//     `
+// }
 
-function renderA11yViewElevationHeader() {
-    return `
-    <tr>
-        <th scope="col">Elevation</th>
-    </tr>
-    `
-}
+// function renderA11yViewElevationHeader() {
+//     return `
+//     <tr>
+//         <th scope="col">Elevation</th>
+//     </tr>
+//     `
+// }
 
-function displayA11yFriendlyElevation(arr) {
-    const results = arr.map((item) => renderA11yFriendlyElevation(item));
-    const resultsHeader = renderA11yViewElevationHeader();
-    $('.js-a11y-elevation').append(resultsHeader, results);
-}
+// function displayA11yFriendlyElevation(arr) {
+//     const results = arr.map((item) => renderA11yFriendlyElevation(item));
+//     const resultsHeader = renderA11yViewElevationHeader();
+//     $('.js-a11y-elevation').append(resultsHeader, results);
+// }

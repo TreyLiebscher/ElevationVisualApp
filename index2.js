@@ -217,9 +217,10 @@ function displayAboutSection() {
 function displayA11yFriendlyView() {
     $('#js-a11yFriendlyView').on('click', function (event) {
         event.preventDefault();
-        $('.mainChartHolder').hide();
-        $('.stepsChartHolder').hide();
-        $('.directionContainer').hide();
+        // $('.mainChartHolder').hide();
+        // $('.stepsChartHolder').hide();
+        // $('.directionContainer').hide();
+        $('.contentHolder').hide();
         $('.js-a11y-view-container').show();
     });
 }
@@ -228,9 +229,10 @@ function displayStandardView() {
     $('#js-standard-view').on('click', function (event) {
         event.preventDefault();
         $('.js-a11y-view-container').hide();
-        $('.mainChartHolder').show();
-        $('.stepsChartHolder').show();
-        $('.directionContainer').show();
+        // $('.mainChartHolder').show();
+        // $('.stepsChartHolder').show();
+        // $('.directionContainer').show();
+        $('.contentHolder').show();
     })
 }
 

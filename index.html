@@ -21,8 +21,10 @@
                 <input id="startDirection" class="directionInput" placeholder="enter your starting address" required>
                 <label for="endDirection" class="formLabels">Destination</label>
                 <input id="endDirection" class="directionInput" placeholder="enter your destination" required>
-                <button type="submit" id="directionSubmit">Go</button>
-                <button type="button" class="js-clearResults">Clear</button>
+                <div class="buttonHolder">
+                    <button type="submit" id="directionSubmit">Go</button>
+                    <button type="button" class="js-clearResults">Clear</button>
+                </div>
             </form>
         </section>
         <section role="region" class="viewModeHolder">
@@ -46,32 +48,30 @@
                 <ol id="js-direction-result">
                 </ol>
             </div>
+        </section>
 
-            <div class='js-a11y-view-container' role="article" tabindex="0">
+        <div class='js-a11y-view-container' role="article" tabindex="0">
                 <section role='region' class='a11yTableHolder'>
                     <table class='js-a11y-directions'>
                     </table>
-                    <table class="js-a11y-elevation">
-                    </table>
+                    <!-- <table class="js-a11y-elevation">
+                    </table> -->
                 </section>
-            </div>
-
-        </section>
-
+        </div>
 
         <div class="aboutContainer">
             <section role="region" class="aboutElevationVisual">
                 <h2 class="aboutHeader">How to use the Elevation Visualizer</h2>
                 <p>If you've ever wondered what a trip you're planning on taking looks like in terms of elevation, this is the
                     app for you!</p>
-                <ul class="aboutDirections">
+                <ol class="aboutDirections">
                     <li>Enter your starting address and your destination then press Go</li>
                     <li>The blue graph represents elevation along your total journey. The x-axis represents the corresponding
                         direction maneuver while the y-axis represents the elevation at the starting point of that maneuver</li>
                     <li>A list of directions will also be displayed. Clicking one of these directions will display a second graph
                         with an orange line. This graph represents the elevation along that part of the journey</li>
                     <li>Entering a new set of locations or clicking Clear will reset the app and allow you to start over</li>
-                </ul>
+                </ol>
                 <div class="exampleHolder">
                     <img src="https://i.imgur.com/clwRK5M.png" class="exampleImg" alt="an example of the elevation visualizer in action">
                 </div>
