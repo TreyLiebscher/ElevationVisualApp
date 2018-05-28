@@ -165,25 +165,3 @@ function displayA11yFriendlyDirections(arr) {
     const resultsHeader = renderA11yViewDirectionsHeader();
     $('.js-a11y-directions').append(resultsHeader, results);
 }
-
-// function renderA11yFriendlyElevation(result) {
-//     return `
-//     <tr class="a11yTableData">
-//         <td>${result.elevation}</td>
-//     </tr>
-//     `
-// }
-
-// function renderA11yViewElevationHeader() {
-//     return `
-//     <tr>
-//         <th scope="col">Elevation</th>
-//     </tr>
-//     `
-// }
-
-// function displayA11yFriendlyElevation(arr) {
-//     const results = arr.map((item) => renderA11yFriendlyElevation(item));
-//     const resultsHeader = renderA11yViewElevationHeader();
-//     $('.js-a11y-elevation').append(resultsHeader, results);
-// }
