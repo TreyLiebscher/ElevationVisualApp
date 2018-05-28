@@ -1,6 +1,6 @@
 # Elevation Visualizer
 
-## Live demo: 
+## Live demo
 
 https://treyliebscher.github.io/ElevationVisualApp/
 
