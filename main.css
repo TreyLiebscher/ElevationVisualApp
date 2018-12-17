@@ -61,6 +61,7 @@ h1 {
 #directionSubmit,
 .js-clearResults {
     margin: auto auto 1% auto;
+    font-size: 16px;
 }
 
 .viewModeHolder {
@@ -299,6 +300,7 @@ th {
     #directionSubmit,
     .js-clearResults {
         margin: auto auto 1% auto;
+        font-size: 16px;
     }
     .directionInput {
         width: 50%;
