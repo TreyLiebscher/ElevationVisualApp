@@ -29,6 +29,7 @@ h1 {
     margin-bottom: 1%;
     border-radius: 7px;
     border: 1px solid lightgray;
+    font-size: 16px;
 }
 
 #directionSubmit {
@@ -302,6 +303,7 @@ th {
     .directionInput {
         width: 50%;
         height: 35px;
+        font-size: 16px;
     }
     #directionSubmit,
     .js-clearResults {
