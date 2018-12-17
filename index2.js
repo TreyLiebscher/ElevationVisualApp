@@ -80,14 +80,14 @@ var chart = new Chart(ctx, {
                 display: true,
                 gridLines: {
                     display: true,
-                    color: '#000000'
+                    color: '#ffffff'
                 }
             }],
             yAxes: [{
                 display: true,
                 gridLines: {
                     display: true,
-                    color: '#000000'
+                    color: '#ffffff'
                 }
             }]
         }
@@ -121,14 +121,14 @@ var stepsChart = new Chart(stepsContent, {
                 display: true,
                 gridLines: {
                     display: true,
-                    color: '#000000'
+                    color: '#ffffff'
                 }
             }],
             yAxes: [{
                 display: true,
                 gridLines: {
                     display: true,
-                    color: '#000000'
+                    color: '#ffffff'
                 }
             }]
         }

@@ -4,7 +4,7 @@
 }
 
 html {
-    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('https://i.imgur.com/mzaDnzx.jpg') no-repeat center center fixed;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://i.imgur.com/mzaDnzx.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -81,7 +81,7 @@ h1 {
 }
 
 .directionListItem {
-    border: 1px solid black;
+    border: 1px solid #00000000;
 }
 
 #loading {
@@ -114,19 +114,37 @@ h1 {
     height: 100vh;
     /* width: 90vw; */
     border-radius: 7px;
-    background-color: #ffffffad;
+    background-color: #000000d6;
     margin-bottom: 2%;
+    color: white;
 }
 
 .aboutContainer {
-    /* height: 90vh;
-    width: 90vw; */
-    background-color: white;
     position: absolute;
     top: 20px;
-    /* overflow-y: scroll; */
     border-radius: 5px;
     display: none;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    background-color: #000000e3;
+    border: 10px solid white;
+    margin-bottom: 20px;
+    padding: 1em;
+}
+
+.aboutDirections {
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+    list-style: none;
+    width: 80%;
+    margin: auto;
+}
+
+.aboutListItem {
+    border: 1px solid white;
+    margin-bottom: 10px;
 }
 
 
@@ -137,6 +155,7 @@ h1 {
     background-color: #50b4db;
     font-size: 20px;
     color: black;
+    margin-bottom: 10px;
 }
 
 .exampleImg {
@@ -234,7 +253,7 @@ th {
     }
 
     .aboutContainer {
-        height: 90vh;
+        /* height: 90vh; */
         width: 90vw;
     }
 
@@ -259,11 +278,11 @@ th {
         height: 100%;
     }
     .directionListItem {
-        border: 1px solid black;
+        border: 1px solid #00000000;
         padding: 1%;
     }
     .directionListItem:hover {
-        background-color: #dbdbdb;
+        border: 1px solid white;
         cursor: pointer;
     }
     .controlHolder {
