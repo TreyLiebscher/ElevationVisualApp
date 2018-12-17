@@ -15,71 +15,76 @@ h1 {
     width: 100%;
     text-align: center;
     color: white;
-    margin-bottom: 0;
+    margin-bottom: 2%;
+    margin-top: 2%;
 }
 
 .controlHolder {
     text-align: center;
     padding: 1%;
+    margin-bottom: 4%;
 }
 
 .directionInput {
     width: 100%;
     height: 40px;
     margin-bottom: 1%;
-    border-radius: 7px;
-    border: 1px solid lightgray;
+    border: 1px solid white;
     font-size: 16px;
+    background-color: #0000009c;
+    color: white;
+    border-radius: 0px;
+    padding: 5px;
 }
 
 #directionSubmit {
     background-color: #50b4db;
+    border: 3px solid #50b4db;
+    width: 70%;
 }
 
 .js-clearResults {
     background-color: #e79f31;
+    border: 3px solid #e79f31;
+    width: 30%;
 }
 
 .formLabels {
     color: white;
     text-align: left;
-    width: 50%;
-    margin: auto;
+    margin-bottom: 5px;
 }
 
 #directionSubmit,
 .js-clearResults {
-    width: 49%;
-    height: 40px;
-    border-radius: 7px;
+    height: 70px;
+    border-radius: 3px;
     font-size: 18px;
-    border: none;
     color: black;
 }
 
-#js-direction-form .directionInput,
-#directionSubmit,
-.js-clearResults {
+#js-direction-form .directionInput {
     margin: auto auto 1% auto;
     font-size: 16px;
 }
 
 .viewModeHolder {
     justify-content: center;
-    margin: 0 auto 2% auto;
+    margin: 4% auto 4% auto;
     display: flex;
-    flex-direction: column;
-    width: 50vw;
+    flex-direction: row;
 }
 
 .viewButtons {
-    display: block;
     border: none;
-    border-radius: 5px;
     background-color: #525252;
     font-size: 14px;
     color: white;
-    margin-bottom: 1%;
+    height: 70px;
+    flex: 1;
+    display: flex;
+    margin: .2em;
+    justify-content: center;
 }
 
 .directionListItem {
@@ -93,6 +98,11 @@ h1 {
     right: 0;
     bottom: 0;
     margin: auto;
+}
+
+.buttonHolder {
+    display: flex;
+    flex-direction: row-reverse;
 }
 
 .loadingHolder {
@@ -114,50 +124,56 @@ h1 {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    /* width: 90vw; */
-    border-radius: 7px;
-    background-color: #000000d6;
-    margin-bottom: 2%;
+    border-radius: 5px;
+    background-color: #0000008c;
     color: white;
+    border: 2px solid white;
 }
 
 .aboutContainer {
     position: absolute;
     top: 20px;
+    left: 0;
     border-radius: 5px;
     display: none;
     color: white;
     display: flex;
     flex-direction: column;
     background-color: #000000e3;
-    border: 10px solid white;
+    border: 2px solid white;
     margin-bottom: 20px;
-    padding: 1em;
 }
 
 .aboutDirections {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     padding: 0px;
     list-style: none;
-    width: 80%;
     margin: auto;
 }
 
 .aboutListItem {
     border: 1px solid white;
     margin-bottom: 10px;
+    flex: auto;
+    margin: .2em;
+    padding: 10px;
+    font-size: 12px;
+    align-items: center;
+    display: flex;
 }
 
 
 #js-close-about {
     width: 50vw;
     height: 5vh;
-    border: none;
-    background-color: #50b4db;
+    border: 1px solid;
+    background-color: transparent;
     font-size: 20px;
-    color: black;
+    color: #50b4db;
     margin-bottom: 10px;
+    border-radius: 5px;
 }
 
 .exampleImg {
@@ -239,100 +255,152 @@ th {
 }
 
 .exampleHolder {
-    width: 100vw;
+    width: 100%;
 }
 
 @media only screen and (min-width: 640px) {
-    
+
     html,
     body {
         margin: auto;
         width: 95%;
     }
-    
+
     h1 {
         font-size: 40px;
     }
 
     .aboutContainer {
-        /* height: 90vh; */
         width: 90vw;
+        left: initial;
+    }
+
+
+    .aboutDirections {
+        flex-wrap: nowrap;
+    }
+
+    .aboutListItem {
+        flex: 1;
     }
 
     .exampleHolder {
         width: 50vw;
         margin: 10px auto 10px auto;
     }
+
     .contentHolder {
         flex-direction: row;
         height: 50vh;
         width: 90vw;
         padding: 0 5px 0 5px;
     }
+
     .mainChartHolder,
     .stepsChartHolder {
         position: relative;
         height: 100%;
         width: 40%;
     }
+
     .directionContainer {
         width: 20%;
         height: 100%;
     }
+
     .directionListItem {
         border: 1px solid #00000000;
         padding: 1%;
     }
+
     .directionListItem:hover {
         border: 1px solid white;
         cursor: pointer;
     }
+
     .controlHolder {
-        text-align: center;
-        padding: 1%;
+        border: 3px solid white;
+        width: 50%;
+        margin: auto;
+        margin-bottom: 4%;
+        border-radius: 5px;
+        background-color: #00000063;
     }
+
     #js-direction-form {
         display: flex;
         flex-direction: column;
         text-align: center;
     }
+
     #js-direction-form .directionInput,
     #directionSubmit,
     .js-clearResults {
         margin: auto auto 1% auto;
         font-size: 16px;
     }
+
     .directionInput {
-        width: 50%;
         height: 35px;
         font-size: 16px;
     }
+
+    #directionSubmit {
+        width: 70%;
+        margin: 0.5em;
+    }
+
+    .js-clearResults {
+        width: 30%;
+        margin: 0.5em;
+    }
+
     #directionSubmit,
     .js-clearResults {
-        width: 25%;
+        height: 40px;
     }
-    #directionSubmit:hover,
-    #directionSubmit:focus,
-    .js-clearResults:hover,
-    .js-clearResults:focus,
+
     #js-close-about:hover,
     #js-close-about:focus {
         cursor: pointer;
-        filter: brightness(110%);
+        background-color: #312f2f;
     }
-    .viewModeHolder {
-        flex-direction: row;
+
+    #directionSubmit:hover,
+    #directionSubmit:focus {
+        cursor: pointer;
+        background-color: #00000070;
+        border: 3px solid #50b4db;
+        color: white;
     }
+
+    .js-clearResults:hover,
+    .js-clearResults:focus {
+        cursor: pointer;
+        background-color: #00000070;
+        border: 3px solid #e79f31;
+        color: white;
+    }
+
     .viewButtons {
         width: 10vw;
-        margin-right: 2%;
+        margin: .2em;
+        height: 40px;
     }
+
+
+    .viewModeHolder {
+        width: 50vw;
+    }
+
+
     .viewButtons:hover,
     .viewButtons:focus {
         cursor: pointer;
         background-color: white;
         color: black;
     }
+
     .loadingHolder {
         height: 50vh;
         width: 90vw;

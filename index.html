@@ -27,16 +27,11 @@
                 </div>
             </form>
         </section>
-        <section role="region" class="viewModeHolder">
-            <button type="button" id="js-standard-view" class="viewButtons">Standard View</button>
-            <button type="button" id="js-a11yFriendlyView" class="viewButtons">Visually Impaired Users</button>
-            <button type="button" id="js-about" class="viewButtons">?</button>
-        </section>
+
         <div class="loadingHolder">
             <img src="https://i.imgur.com/QZhjGdU.gif" title="source: imgur.com" id="loading" />
         </div>
         <section role="region" class="contentHolder">
-
             <div class="mainChartHolder" aria-hidden="true">
                 <canvas id="myChart"></canvas>
             </div>
@@ -76,6 +71,12 @@
                 <button type="button" id="js-close-about">Try it out!</button>
             </section>
         </div>
+
+        <section role="region" class="viewModeHolder">
+            <button type="button" id="js-standard-view" class="viewButtons">Standard View</button>
+            <button type="button" id="js-a11yFriendlyView" class="viewButtons">Visually Impaired Users</button>
+            <button type="button" id="js-about" class="viewButtons">?</button>
+        </section>
 
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
