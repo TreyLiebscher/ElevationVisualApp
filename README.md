@@ -2,7 +2,7 @@
 
 ## Live demo
 
-https://treyliebscher.github.io/ElevationVisualApp/
+ https://treyliebscher.github.io/ElevationVisualApp/
 
 ![alt text](https://i.imgur.com/EI6zkPw.png)
 
